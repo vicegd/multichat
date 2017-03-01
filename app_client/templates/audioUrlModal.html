@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{data.selectAudio}}</h3>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label for="url">{{data.url}}</label>
+        <input type="text" ng-model="url" class="form-control" id="url">
+    </div>
+    <button class="btn btn-success" ng-click="accept()">{{data.accept}}</button>
+    <button class="btn btn-warning" type="button" ng-click="close()">{{data.cancel}}</button>
+</div>
+<div class="modal-footer">
+</div>

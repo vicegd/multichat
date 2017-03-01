@@ -1,0 +1,11 @@
+extends layout-common
+
+block content-common
+  h1= lang.section
+  .alert.alert-info <strong>#{lang.infoLabel}:</strong> #{lang.info}
+  .row
+    .col-md-6
+      //!= is to render HTML tags included in lang.message
+      p!= lang.message
+    .col-md-6
+      img(src='/images/logos.png' alt='#{lang.imageAlt}' width='90%' height='90%')

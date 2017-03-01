@@ -1,0 +1,54 @@
+extends layout-common
+
+block content-common
+  .row
+    .col-md-2
+      .panel.panel-success
+        .panel-heading #{layoutMultichat.people}
+        .panel-body
+          block people
+    .col-md-5
+      .panel.panel-info
+        .panel-heading #{layoutMultichat.messages}
+        .panel-body
+          block messages
+    .col-md-5
+      .row
+        .col-md-6
+          .panel.panel-info
+            .panel-heading
+              ul.nav.nav-tabs.nav-justified
+                li.active
+                  a(href='#video' data-toggle='tab') #{layoutMultichat.video}
+                li
+                  a(href='#audio' data-toggle='tab') #{layoutMultichat.audio}
+            .panel-body
+              .tab-content
+                .tab-pane.fade.in.active#video
+                  block video
+                .tab-pane.fade#audio
+                  block audio
+        .col-md-6
+          .panel.panel-info
+            .panel-heading #{layoutMultichat.videoconferences}
+            .panel-body
+              block videoconference
+      .row
+        .col-md-12
+          .panel.panel-info
+            .panel-heading
+              ul.nav.nav-tabs.nav-justified
+                li.active
+                  a(href='#geolocation' data-toggle='tab') #{layoutMultichat.geolocation}
+                li
+                  a(href='#drawings' data-toggle='tab') #{layoutMultichat.drawings}
+                li
+                  a(href='#presentations' data-toggle='tab') #{layoutMultichat.presentations}
+            .panel-body
+              .tab-content
+                .tab-pane.fade.in.active#geolocation
+                  block geolocation
+                .tab-pane.fade#drawings
+                  block drawings
+                .tab-pane.fade#presentations
+                  block presentations

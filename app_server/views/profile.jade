@@ -1,0 +1,69 @@
+extends layout-common
+
+block content-common
+  div(ng-controller='profileCtrl')
+    h1= lang.section
+
+    form.form-horizontal.css-form(name='form' novalidate ng-cloak)
+      div.alert.alert-success(ng-show='data.okShow') #{lang.done}
+      div.alert.alert-danger(ng-show='data.errorShow') #{lang.error}: {{data.error}}
+      h4 #{lang.hello} #{sub.userName}. #{lang.description}
+
+      .form-group
+        label.control-label.col-sm-1(for='userName') #{lang.userName}:
+        .col-sm-2
+          input.form-control(type='text' id='userName' name='userName' disabled
+          ng-model='profile.userName' ng-init='profile.userName="#{sub.userName}"')
+
+      .form-group(ng-class='((form.name.$touched || form.$submitted) ' +
+      '&& form.name.$invalid) ? "has-error has-feedback" : "has-feedback"')
+        label.control-label.col-sm-1(for='name') #{lang.name}:
+        .col-sm-2
+          input.form-control(type='text' id='name' name='name'
+          ng-init='profile.name="#{sub.name}"' ng-model="profile.name"
+          ng-minlength='3' ng-maxlength='20')
+          div(ng-show="form.name.$valid")
+            .glyphicon.glyphicon-ok.form-control-feedback
+          div(ng-show="form.$submitted || form.name.$touched")
+            .text-danger(ng-show="form.name.$error.minlength " +
+            "|| form.name.$error.maxlength") #{lang.fieldSizeCheck}
+            .glyphicon.glyphicon-warning-sign.form-control-feedback(
+            ng-show="form.name.$error.minlength || form.name.$error.maxlength")
+
+      .form-group(ng-class='((form.pwd.$touched || form.$submitted) ' +
+      '&& form.pwd.$invalid) ? "has-error has-feedback" : "has-feedback"')
+        label.control-label.col-sm-1(for='pwd') #{lang.password}:
+        .col-sm-2
+          input.form-control(type='password' id='pwd' name='pwd'
+          placeholder='#{lang.passwordEnter}' ng-model="profile.password"
+          ng-minlength='3' ng-maxlength='20')
+          div(ng-show="form.pwd.$valid")
+            .glyphicon.glyphicon-ok.form-control-feedback
+          div(ng-show="form.$submitted || form.pwd.$touched")
+            .text-danger(ng-show="form.pwd.$error.minlength " +
+            "|| form.pwd.$error.maxlength") #{lang.fieldSizeCheck}
+            .glyphicon.glyphicon-warning-sign.form-control-feedback(
+            ng-show="form.pwd.$error.minlength || form.pwd.$error.maxlength")
+
+      .form-group(ng-class='((form.pwd2.$touched || form.$submitted) ' +
+      '&& form.pwd2.$invalid) ? "has-error has-feedback" : "has-feedback"')
+        label.control-label.col-sm-1(for='pwd2') #{lang.passwordRepeat}:
+        .col-sm-2
+          input.form-control(type='password' id='pwd2' name='pwd2'
+          placeholder='#{lang.passwordRepeatEnter}' ng-model="profile.password2"
+          ng-minlength='3' ng-maxlength='20' compare-to='profile.password')
+          div(ng-show="form.pwd2.$valid")
+            .glyphicon.glyphicon-ok.form-control-feedback
+          div(ng-show="form.$submitted || form.pwd2.$touched")
+            .text-danger(ng-show="form.pwd2.$error.minlength " +
+            "|| form.pwd2.$error.maxlength") #{lang.fieldSizeCheck}
+            .glyphicon.glyphicon-warning-sign.form-control-feedback(
+            ng-show="form.pwd2.$error.minlength || form.pwd2.$error.maxlength")
+            .text-danger(ng-show="form.pwd2.$error.compareTo") #{lang.passwordsCheck}
+            .glyphicon.glyphicon-warning-sign.form-control-feedback(
+            ng-show="form.pwd2.$error.compareTo")
+
+      button.btn.btn-info(type='submit'
+      ng-click='form.$valid && submit(profile)') #{lang.submit}
+      | &nbsp;
+      button.btn.btn-danger(type='submit' ng-click='submitDelete(profile)') #{lang.delete}

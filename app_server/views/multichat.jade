@@ -1,0 +1,148 @@
+extends layout-multichat
+
+block people
+  div(ng-init='sub="#{sub.userName}%#{sub.name}"')
+    div#peopleList(ng-controller='peopleCtrl')
+      div(ng-if='data.loading[0] == true')
+        md-progress-circular(md-mode='indeterminate')
+      div(ng-if='data.loading[0] == false' ng-cloak)
+        ul#listGroupPeople.list-group
+          li.list-group-item(ng-repeat='person in data.people')
+            .fa.fa-user-circle.fa &nbsp;
+            | {{person.name}}
+
+block messages
+  div#messageList(ng-controller='messagesCtrl')
+    div(ng-if='data.loading[0] == true')
+      md-progress-circular(md-mode='indeterminate')
+    div(ng-if='data.loading[0] == false' ng-cloak)
+      ul#listGroupMessages.list-group
+        li.list-group-item(ng-repeat='message in data.messages'
+        ng-class=
+        '(message.userName == userName) ? "listGroupMessagesLeft" : "listGroupMessagesRight"')
+          p.messageUserName {{message.userName}}
+          div(ng-if='message.operation == "text"')
+            p.messageText(ng-bind-html="message.text | emojis")
+          div(ng-if='message.operation == "picture"')
+            button.btn.btn-link(type=button ng-click='showPictureOpenModal(message.binary)')
+              span(ng-bind-html="message | pictures")
+          div(ng-if='message.operation == "attached"')
+            a(ng-href="{{ message.binary}}"
+            download="{{message.name}}") <img src="images/file-icon.jpg">
+              | {{message.name}}
+        #emojisArea(ng-show="showEmojis")
+          button.btn.btn-link(type=button ng-click='iconSent(":D")' border="0")
+            img(src='/images/emojis/smiley-01.png' border="0" width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":)")')
+            img(src='/images/emojis/smiley-05.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(";)")')
+            img(src='/images/emojis/smiley-06.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":x")')
+            img(src='/images/emojis/smiley-07.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":*")')
+            img(src='/images/emojis/smiley-08.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(";-)")')
+            img(src='/images/emojis/smiley-12.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":-P")')
+            img(src='/images/emojis/smiley-14.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":S")')
+            img(src='/images/emojis/smiley-15.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":(")')
+            img(src='/images/emojis/smiley-17.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":o)")')
+            img(src='/images/emojis/smiley-18.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent("%)")')
+            img(src='/images/emojis/smiley-19.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":\'(")')
+            img(src='/images/emojis/smiley-22.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":\')")')
+            img(src='/images/emojis/smiley-23.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent("D=%")')
+            img(src='/images/emojis/smiley-32.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent("D:%")')
+            img(src='/images/emojis/smiley-33.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":[")')
+            img(src='/images/emojis/smiley-35.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent("|O)")')
+            img(src='/images/emojis/smiley-41.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":-C")')
+            img(src='/images/emojis/orte-59.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":-L")')
+            img(src='/images/emojis/orte-15.png' width='40px' height='40px')
+          button.btn.btn-link(type=button ng-click='iconSent(":-K")')
+            img(src='/images/emojis/natur-09.png' width='40px' height='40px')
+      #messageControlArea
+        .div#messageControlAreaButtoms
+          button.btn.btn-primary(type=button ng-click='showAllEmojis()')
+            p.fa.fa-smile-o.fa-2x.fa-white(title="#{lang.showEmojis}")
+          | &nbsp;
+          button.btn.btn-primary(type=button ng-click='showFileModal()')
+            p.fa.fa-file.fa-2x.fa-white(title="#{lang.sendFiles}")
+          | &nbsp;
+        .div
+          textarea.form-control(rows='1' placeholder='#{lang.commentEnter}'
+          ng-model='$parent.comment' ng-keyup='checkEnter($event)')
+          button.btn.btn-primary(type=button ng-disabled="!$parent.comment"
+          ng-click='commentSent()') #{lang.send}
+
+block video
+  div(ng-controller='videoCtrl')
+    input(type='checkbox' id='muteVideoCheckbox' ng-model='muteVideoModel'
+    ng-checked='{{muteVideoModel}}' ng-change='changeMuteVideoModel()')
+    | &nbsp; #{lang.disable} &nbsp;
+    button.btn.btn-link(ng-click=
+    'showVideoModal("#{lang.modal.selectVideo}", "#{lang.modal.url}", "#{lang.modal.accept}", "#{lang.modal.cancel}")') #{lang.selectVideo}
+    video#videoId(controls width="100%" height="100%")
+      source#videoSource(src='#{config.videoUrl}')
+
+block audio
+  div(ng-controller='audioCtrl')
+    input(type='checkbox' id='muteAudioCheckbox' ng-model='muteAudioModel'
+    ng-checked='{{muteAudioModel}}' ng-change='changeMuteAudioModel()')
+    | &nbsp; #{lang.disable} &nbsp;
+    button.btn.btn-link(ng-click=
+    'showAudioModal("#{lang.modal.selectAudio}","#{lang.modal.url}", "#{lang.modal.accept}", "#{lang.modal.cancel}")') #{lang.selectAudio}
+    audio#audioId(controls width='100%' height='100%')
+      source#audioSource(src='#{config.audioUrl}')
+
+block videoconference
+  div(ng-controller='videoconferenceCtrl')
+    div(ng-if='data.loading[0] == true')
+      md-progress-circular(md-mode='indeterminate')
+    div(ng-if='data.loading[0] == false' ng-cloak)
+      input(type='checkbox' id='disableVideoconferenceCheckbox'
+      ng-model='$parent.disableVideoconferenceModel'
+      ng-checked='{{disableVideoconferenceModel}}'
+      ng-change='changeDisableVideoconferenceModel()')
+      | &nbsp; Disable &nbsp;
+      input(type='checkbox' id='muteVideoconferenceCheckbox'
+      ng-model='$parent.muteVideoconferenceModel'
+      ng-checked='{{muteVideoconferenceModel}}'
+      ng-change='changeMuteVideoconferenceModel()')
+      | &nbsp; Mute &nbsp;
+    div#videoconferenceArea(ng-cloak)
+      video#videoconferenceLocal
+
+
+block geolocation
+  div(ng-controller='geolocationCtrl')
+    #map
+
+block drawings
+  div(ng-controller='drawingCtrl')
+    button.btn.btn-default(ng-click='addCircle()') #{lang.addCircle}
+    | &nbsp;
+    button.btn.btn-default(ng-click='addRectangle()') #{lang.addRectangle}
+    | &nbsp;
+    button.btn.btn-default(ng-click='addTriangle()') #{lang.addTriangle}
+    | &nbsp;
+    button.btn.btn-default(ng-click='getPencil()') #{lang.pencil}
+    | &nbsp;
+    button.btn.btn-default(ng-click='getSelection()') #{lang.selection}
+    | &nbsp;
+    button.btn.btn-default(ng-click='clearAll()') #{lang.clearAll}
+    canvas#canvas
+
+block presentations
+  div(ng-controller='presentationCtrl')
+    iframe#iframe(src='#{config.presentationUrl}' width='100%' height='400px')

@@ -1,0 +1,6 @@
+extends layout-common
+
+block content-common
+  div(ng-controller='logoutCtrl')
+    h1= lang.section
+    .alert.alert-success <strong>#{lang.successLabel}:</strong> #{lang.message}

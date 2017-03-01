@@ -1,0 +1,47 @@
+extends layout-basic
+
+block content-basic
+  .jumbotron.text-center
+    h1= lang.message
+    p= lang.description
+    a(href="login")
+      button.btn.btn-success #{lang.login}
+    | &nbsp;
+    a(href="register")
+      button.btn.btn-success #{lang.register}
+    | &nbsp;
+    a(href="about")
+      button.btn.btn-info #{lang.info}
+  .container
+    .row
+      .col-md-4
+        h3 #{lang.feature1.name} &nbsp;
+          .glyphicon.glyphicon-envelope
+        p= lang.feature1.description1
+        p= lang.feature1.description2
+      .col-md-4
+        h3 #{lang.feature2.name} &nbsp;
+          .glyphicon.glyphicon-music
+        p= lang.feature2.description1
+        p= lang.feature2.description2
+      .col-md-4
+        h3 #{lang.feature3.name} &nbsp;
+          .glyphicon.glyphicon-facetime-video
+        p= lang.feature3.description1
+        p= lang.feature3.description2
+    .row
+      .col-md-4
+        h3 #{lang.feature4.name} &nbsp;
+          .glyphicon.glyphicon-pencil
+        p= lang.feature4.description1
+        p= lang.feature4.description2
+      .col-md-4
+        h3 #{lang.feature5.name} &nbsp;
+          .glyphicon.glyphicon-duplicate
+        p= lang.feature5.description1
+        p= lang.feature5.description2
+      .col-md-4
+        h3 #{lang.feature6.name} &nbsp;
+          .glyphicon.glyphicon-map-marker
+        p= lang.feature6.description1
+        p= lang.feature6.description2

@@ -1,0 +1,11 @@
+extends layout-basic
+
+block content-basic
+  .row
+    .col-md-7
+      h1.text-danger= lang.message
+      h2.text-danger #{error.status}
+      if error.stack != ''
+        pre #{error.stack}
+    .col-md-5
+      img(src='/images/#{error.imageSrc}' alt='#{error.imageAlt}')

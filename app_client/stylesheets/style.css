@@ -1,0 +1,122 @@
+/*PEOPLE LIST*/
+#peopleList {
+  height: 750px;
+  overflow: auto;
+}
+
+ul#listGroupPeople {
+  background-color: #f9fffe;
+  font-family: "Open Sans", sans-serif;
+  font-size: medium;
+}
+
+ul#listGroupPeople li {
+  border-radius: 10px;
+  color: #028225;
+}
+
+ul#listGroupPeople li:first-child {
+  background-color: #f9feff;
+  font-style: italic;
+}
+
+/*MAP*/
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+/*CANVAS*/
+#canvas {
+  background-color: oldlace;
+}
+
+/*MESSAGES*/
+#messageList {
+  height:750px;
+  overflow: auto;
+}
+
+ul#listGroupMessages {
+  background-image: url("../images/nacre-background-tile.jpg");
+  background-repeat: repeat;
+  height: 590px;
+  margin: 0px;
+  padding: 0px;
+  overflow: auto;
+  border-radius: 10px;
+  position:relative;
+}
+
+.listGroupMessagesLeft {
+  border-radius: 20px;
+  background-color: white;
+  word-wrap: break-word;
+  max-width: 400px;
+  float: left;
+  clear: both;
+}
+
+.listGroupMessagesLeft .messageUserName {
+  color: blue;
+  font-family: "League Gothic", Impact, sans-serif;
+  font-size: small;
+}
+
+.listGroupMessagesRight {
+  border-radius: 20px;
+  background-color: white;
+  word-wrap: break-word;
+  max-width: 400px;
+  float: right;
+  clear: both;
+}
+
+.listGroupMessagesRight .messageUserName {
+  color: green;
+  font-family: "League Gothic", Impact, sans-serif;
+  font-size: small;
+}
+
+.messageText {
+  font-family: Calibri;
+}
+
+#messageControlArea {
+  padding-top: 0px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: lightgrey;
+}
+
+#messageControlAreaButtoms {
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.fa-white {
+  color: white;
+}
+
+#emojisArea {
+  background-image: url("../images/nacre-background-tile.jpg");
+  background-repeat: repeat;
+  position:absolute;
+  bottom: 0px;
+  text-align: center;
+}
+
+#uploadPictureDropzone {
+  border: dashed;
+  color: blue;
+}
+
+/*******************VIDEOCONFERENCE*********/
+#videoconferenceLocal {
+  padding-left: 5px;
+}
+
+.videoRemote {
+  padding-left: 5px;
+}

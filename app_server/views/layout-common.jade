@@ -1,0 +1,51 @@
+extends layout-basic
+
+block content-basic
+  .container-fluid
+    .row
+      .col-md-12
+        .panel
+          .panel-body
+            .row
+              .col-md-6(align='left')
+                a(href="/" title="#{layoutCommon.goHome}")
+                  img(src='images/logo.png' alt='#{layoutCommon.goHome}' width='200'
+                  height='50')
+              .col-md-6(align='right')
+                if authenticated != false
+                  a.fa.fa-wechat.fa-2x(href="/multichat" title="#{layoutCommon.goVideochat}")
+                  | &nbsp;&nbsp;&nbsp;
+                  a.fa.fa-user.fa-2x(href="/profile" title="#{layoutCommon.goProfile}")
+                  | &nbsp;&nbsp;&nbsp;
+                  a.fa.fa-info.fa-2x(href="/about" title="#{layoutCommon.goAbout}")
+                  |&nbsp;&nbsp;&nbsp;
+                  a.glyphicon.glyphicon-log-out.fa-2x(href="logout"
+                  title="#{layoutCommon.goLoout}")
+                  | &nbsp;&nbsp;&nbsp;
+                else
+                  a.fa.fa-info.fa-2x(href="/about" title="#{layoutCommon.goAbout}")
+                  | &nbsp;&nbsp;&nbsp;
+                  a.glyphicon.glyphicon-log-in.fa-2x(href="/login"
+                  title="#{layoutCommon.goLogin}")
+                  | &nbsp;&nbsp;&nbsp;
+    .row
+      .col-md-12
+        .panel.panel-primary
+          .panel-heading
+          .panel-body
+            block content-common
+          .panel-footer
+    .row
+      .col-md-12
+        .panel
+          .row
+            .col-md-8
+              p.text-muted.small(
+              align='center') ©Copyright #{layoutCommon.year}. #{layoutCommon.foot}
+            .col-md-4
+              a.btn.btn-twitter(href="https://twitter.com/miwuniovi" title="Twitter")
+                span.fa.fa-twitter.fa-2x
+              | &nbsp;
+              a.btn.btn-facebook(href="https://www.facebook.com/masteringenieriaweboviedo"
+              title="Facebook")
+                span.fa.fa-facebook.fa-2x
