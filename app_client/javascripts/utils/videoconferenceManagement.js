@@ -119,9 +119,9 @@ function VideoconferenceManagement(ws, growl) {
       RTCPeerConnection = webkitRTCPeerConnection;
 
     //This is an optional configuration string, associated with NAT traversal
-    //var configuration = {
-    //  "iceServers": [{ "urls": "stun:stun.phoneserve.com"}]
-    //};
+    var configuration = {
+      "iceServers": [{ "urls": "stun:stun.phoneserve.com"}]
+    };
 
     var localPeerConnection = new RTCPeerConnection(configuration);
 
