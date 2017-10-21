@@ -1,2 +1,2 @@
 # multichat
-Multichat
+Multichat application created using AngularJS, NodeJS, WebSockets y WebRTC
